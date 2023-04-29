@@ -16,21 +16,24 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        page = browser.newPage();
+        utils.PageHolder.setPlaywright(playwright);
+        browser = utils.PageHolder.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        utils.PageHolder.setBrowser(browser);
+        page = utils.PageHolder.getBrowser().newPage();
+        utils.PageHolder.setPage(page);
     }
 
     @AfterMethod
     public void tearDown() {
         attachScreenshot();
-        page.close();
-        browser.close();
-        playwright.close();
+        utils.PageHolder.getPage().close();
+        utils.PageHolder.getBrowser().close();
+        utils.PageHolder.getPlaywright().close();
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] attachScreenshot() {
-        byte[] screenshotBytes = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
+        byte[] screenshotBytes = utils.PageHolder.getPage().screenshot(new Page.ScreenshotOptions().setFullPage(true));
         return screenshotBytes;
     }
 }

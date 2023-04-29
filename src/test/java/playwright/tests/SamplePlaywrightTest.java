@@ -1,5 +1,6 @@
 package playwright.tests;
 
+import com.microsoft.playwright.Page;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -10,6 +11,7 @@ public class SamplePlaywrightTest extends BaseTest {
 
     @Test
     public void testSearch() {
+        Page page = utils.PageHolder.getPage();
         page.navigate("https://www.google.com/");
         page.fill("#searchform input[name='q']", "Playwright");
         page.press("#searchform input[name='q']", "Enter");
@@ -18,6 +20,7 @@ public class SamplePlaywrightTest extends BaseTest {
 
     @Test
     public void testLogin() {
+        Page page = utils.PageHolder.getPage();
         page.navigate("https://www.example.com/login");
         page.fill("#username", "myusername");
         page.fill("#password", "mypassword");

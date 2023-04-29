@@ -1,36 +1,12 @@
 package playwright.tests;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import io.qameta.allure.Attachment;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class SamplePlaywrightTest {
-    private Playwright playwright;
-    private Browser browser;
-    private Page page;
+public class SamplePlaywrightTest extends BaseTest {
 
-    @BeforeMethod
-    public void setUp() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        page = browser.newPage();
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        attachScreenshot();
-        page.close();
-        browser.close();
-        playwright.close();
-    }
 
     @Test
     public void testSearch() {
@@ -49,9 +25,5 @@ public class SamplePlaywrightTest {
         assertTrue(page.url().contains("/dashboard"));
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] attachScreenshot() {
-        byte[] screenshotBytes = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
-        return screenshotBytes;
-    }
+
 }

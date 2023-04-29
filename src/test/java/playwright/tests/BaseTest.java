@@ -7,6 +7,7 @@ import com.microsoft.playwright.Playwright;
 import io.qameta.allure.Attachment;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.PlaywrightObjectsHolder;
 
 public class BaseTest {
     public Playwright playwright;
@@ -16,24 +17,24 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         playwright = Playwright.create();
-        utils.PageHolder.setPlaywright(playwright);
-        browser = utils.PageHolder.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        utils.PageHolder.setBrowser(browser);
-        page = utils.PageHolder.getBrowser().newPage();
-        utils.PageHolder.setPage(page);
+        PlaywrightObjectsHolder.setPlaywright(playwright);
+        browser = PlaywrightObjectsHolder.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        PlaywrightObjectsHolder.setBrowser(browser);
+        page = PlaywrightObjectsHolder.getBrowser().newPage();
+        PlaywrightObjectsHolder.setPage(page);
     }
 
     @AfterMethod
     public void tearDown() {
         attachScreenshot();
-        utils.PageHolder.getPage().close();
-        utils.PageHolder.getBrowser().close();
-        utils.PageHolder.getPlaywright().close();
+        PlaywrightObjectsHolder.getPage().close();
+        PlaywrightObjectsHolder.getBrowser().close();
+        PlaywrightObjectsHolder.getPlaywright().close();
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] attachScreenshot() {
-        byte[] screenshotBytes = utils.PageHolder.getPage().screenshot(new Page.ScreenshotOptions().setFullPage(true));
+        byte[] screenshotBytes = PlaywrightObjectsHolder.getPage().screenshot(new Page.ScreenshotOptions().setFullPage(true));
         return screenshotBytes;
     }
 }

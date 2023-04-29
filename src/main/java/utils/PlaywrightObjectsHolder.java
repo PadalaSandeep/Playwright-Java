@@ -4,7 +4,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-public class PageHolder {
+public class PlaywrightObjectsHolder {
 
     private static final ThreadLocal<Page> page = new ThreadLocal<>();
 
@@ -13,7 +13,7 @@ public class PageHolder {
     }
 
     public static void setPage(Page pageObj) {
-        PageHolder.page.set(pageObj);
+        PlaywrightObjectsHolder.page.set(pageObj);
     }
 
     private static final ThreadLocal<Playwright> playwright = new ThreadLocal<>();
@@ -23,7 +23,7 @@ public class PageHolder {
     }
 
     public static void setPlaywright(Playwright playwrightObj) {
-        PageHolder.playwright.set(playwrightObj);
+        PlaywrightObjectsHolder.playwright.set(playwrightObj);
     }
 
     private static final ThreadLocal<Browser> browser = new ThreadLocal<>();
@@ -33,7 +33,7 @@ public class PageHolder {
     }
 
     public static void setBrowser(Browser browserObj) {
-        PageHolder.browser.set(browserObj);
+        PlaywrightObjectsHolder.browser.set(browserObj);
     }
 
 

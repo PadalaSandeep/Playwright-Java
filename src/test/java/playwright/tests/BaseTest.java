@@ -18,7 +18,9 @@ public class BaseTest {
     public void setUp() {
         playwright = Playwright.create();
         PlaywrightObjectsHolder.setPlaywright(playwright);
-        browser = PlaywrightObjectsHolder.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        //Enable on local only
+        //browser = PlaywrightObjectsHolder.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        browser = PlaywrightObjectsHolder.getPlaywright().chromium().launch();
         PlaywrightObjectsHolder.setBrowser(browser);
         page = PlaywrightObjectsHolder.getBrowser().newPage();
         PlaywrightObjectsHolder.setPage(page);

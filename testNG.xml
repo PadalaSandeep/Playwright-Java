@@ -2,7 +2,7 @@
 <suite name="Playwright" verbose="1" parallel="methods" thread-count="2">
     <test name="Playwright" preserve-order="false">
         <classes>
-            <class name="playwright.tests.SamplePlaywrightTest"></class>
+            <class name="playwright.tests.InputBoxTest"></class>
         </classes>
     </test>
 </suite>

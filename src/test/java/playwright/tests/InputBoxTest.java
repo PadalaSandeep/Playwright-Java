@@ -1,13 +1,16 @@
 package playwright.tests;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 import org.testng.annotations.Test;
+import pages.InputPage;
+import utils.JsonDataReader;
 import utils.PlaywrightObjectsHolder;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-    public class SamplePlaywrightTest extends BaseTest {
+    public class InputBoxTest extends BaseTest {
 
 
         @Test
@@ -27,6 +30,14 @@ import static org.testng.Assert.assertTrue;
         page.fill("#password", "mypassword");
         page.click("#login-button");
         assertTrue(page.url().contains("/dashboard"));
+    }
+
+    @Test
+        public void testInput(){
+            Page page = PlaywrightObjectsHolder.getPage();
+            page.navigate(JsonDataReader.readJson("test-data/InputBoxTestData.json","url"));
+            inputPage = new InputPage(page);
+            inputPage.VerifyInputBox("Sandeep");
     }
 
 

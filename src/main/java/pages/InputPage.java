@@ -11,7 +11,7 @@ public class InputPage {
 
     public InputPage(Page page) {
         this.page = page;
-        this.searchTermInput = page.locator("//*[@placeholder =\"Babu Manickam\"]");
+        this.searchTermInput = page.locator("//input[@id='userId']");
     }
 
     public void VerifyInputBox(String text) {
